@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=MusicKeyboard
+GenericName=MusicKeyboard
+TryExec=sugarapp
+Exec=sugarapp
+Icon=org.sugarlabs.MusicKeyboard
+Type=Application
+Comment=MusicKeyboard
+Terminal=false
+StartupNotify=true
+Categories=Education;Art;
+MimeType=application/x-musickeyboard-activity;

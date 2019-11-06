@@ -1,0 +1,3 @@
+[submodule "sugar-shared-modules"]
+	path = sugar-shared-modules
+	url = https://github.com/tchx84/sugar-shared-modules.git

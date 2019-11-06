@@ -1,0 +1,100 @@
+    {
+    "app-id": "org.sugarlabs.MusicKeyboard",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.28",
+    "sdk": "org.gnome.Sdk",
+    "build-options": {
+        "cflags": "-O2 -g",
+        "cxxflags": "-O2 -g",
+        "env": {
+            "V": "1",
+            "PERL5LIB": "/app/lib/perl/site_perl/5.22.1/",
+            "PYTHON_VERSION": "2"
+        }
+    },
+    "command": "sugarapp",
+    "finish-args": [
+        "--socket=x11",
+        "--socket=wayland",
+        "--socket=pulseaudio",
+        "--share=ipc",
+        "--device=dri",
+        "--filesystem=home",
+        "--filesystem=xdg-run/dconf",
+        "--filesystem=~/.config/dconf:ro",
+        "--talk-name=ca.desrt.dconf",
+        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
+        "--env=SUGAR_BUNDLE_ID=org.sugarlabs.MusicKeyboard",
+        "--env=SUGAR_BUNDLE_PATH=/app/share/sugar/activities/MusicKeyboard.activity/"
+    ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/share/aclocal",
+        "/share/info",
+        "/share/man"
+    ],
+    "modules": [
+        "sugar-shared-modules/sugar/artwork.json",
+        "sugar-shared-modules/sugar/toolkit-gtk3.json",
+        "sugar-shared-modules/python/configparser.json",
+        "sugar-shared-modules/python/sugarapp.json",
+        "sugar-shared-modules/python/numpy.json",
+        {
+            "name": "csound",
+            "buildsystem": "cmake",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/csound/csound.git",
+                    "tag": "6.13.0"
+                }
+            ]
+        },
+        {
+            "name": "ctcsound",
+            "buildsystem": "simple",
+            "build-commands": [
+                "pip2 install --no-index --find-links \"file://${PWD}\" --install-option=\"--prefix=${FLATPAK_DEST}\" ctcsound"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "https://files.pythonhosted.org/packages/ac/bf/8b76843066b189776356675716db4ec3a624c0a9dcd651f263adf527090d/ctcsound-6.13.tar.gz",
+                    "sha256": "69a8e1c44ed8323a8217703bfc44d6b3163ab52633d8d69572b4910a3c7eab47"
+                }
+            ]
+        },
+        {
+            "name": "musickeyboard",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python setup.py install --prefix=/app --skip-install-desktop-file --skip-install-mime"
+            ],
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/godiard/music-keyboard-activity.git",
+                    "branch": "master"
+                },
+                {
+                    "type": "file",
+                    "path": "org.sugarlabs.MusicKeyboard.desktop"
+                },                {
+                    "type": "file",
+                    "path": "org.sugarlabs.MusicKeyboard-application-x-musickeyboard-activity.svg"
+                },
+                {
+                    "type": "patch",
+                    "path": "musickeyboard-port.patch"
+                }
+            ],
+            "post-install": [
+                "install -D org.sugarlabs.MusicKeyboard.desktop /app/share/applications/org.sugarlabs.MusicKeyboard.desktop",
+                "install -D org.sugarlabs.MusicKeyboard-application-x-musickeyboard-activity.svg /app/share/icons/hicolor/scalable/mimetypes/org.sugarlabs.MusicKeyboard-application-x-musickeyboard-activity.svg",
+                "install -D activity/activity-simplepiano.svg /app/share/icons/hicolor/scalable/apps/org.sugarlabs.MusicKeyboard.svg",
+                "install -D activity/mimetypes.xml /app/share/mime/packages/org.sugarlabs.MusicKeyboard.xml"
+            ]
+        }
+    ]
+}
