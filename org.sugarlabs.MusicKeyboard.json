@@ -75,7 +75,7 @@
                 {
                     "type": "git",
                     "url": "https://github.com/godiard/music-keyboard-activity.git",
-                    "branch": "master"
+                    "tag": "v12"
                 },
                 {
                     "type": "file",
