@@ -26,7 +26,8 @@
         "--talk-name=ca.desrt.dconf",
         "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
         "--env=SUGAR_BUNDLE_ID=org.sugarlabs.MusicKeyboard",
-        "--env=SUGAR_BUNDLE_PATH=/app/share/sugar/activities/MusicKeyboard.activity/"
+        "--env=SUGAR_BUNDLE_PATH=/app/share/sugar/activities/MusicKeyboard.activity/",
+        "--env=GDK_BACKEND=x11"
     ],
     "cleanup": [
         "/include",
