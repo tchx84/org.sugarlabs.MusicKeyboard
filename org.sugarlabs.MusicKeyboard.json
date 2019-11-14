@@ -1,15 +1,12 @@
 {
     "app-id": "org.sugarlabs.MusicKeyboard",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.28",
+    "runtime-version": "3.34",
     "sdk": "org.gnome.Sdk",
     "separate-locales": false,
     "build-options": {
-        "cflags": "-O2 -g",
-        "cxxflags": "-O2 -g",
         "env": {
-            "V": "1",
-            "PERL5LIB": "/app/lib/perl/site_perl/5.22.1/",
+            "PERL5LIB": "/app/lib/perl5/site_perl/5.30.0/",
             "PYTHON_VERSION": "2"
         }
     },
@@ -20,11 +17,6 @@
         "--socket=pulseaudio",
         "--share=ipc",
         "--device=dri",
-        "--filesystem=home",
-        "--filesystem=xdg-run/dconf",
-        "--filesystem=~/.config/dconf:ro",
-        "--talk-name=ca.desrt.dconf",
-        "--env=DCONF_USER_CONFIG_DIR=.config/dconf",
         "--env=SUGAR_BUNDLE_ID=org.sugarlabs.MusicKeyboard",
         "--env=SUGAR_BUNDLE_PATH=/app/share/sugar/activities/MusicKeyboard.activity/",
         "--env=GDK_BACKEND=x11"
@@ -37,9 +29,9 @@
         "/share/man"
     ],
     "modules": [
+        "sugar-shared-modules/python/python-2.7.json",
         "sugar-shared-modules/sugar/artwork.json",
         "sugar-shared-modules/sugar/toolkit-gtk3.json",
-        "sugar-shared-modules/python/configparser.json",
         "sugar-shared-modules/python/sugarapp.json",
         "sugar-shared-modules/python/numpy.json",
         {
